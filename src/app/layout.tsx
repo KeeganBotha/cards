@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cards",
   description: "Your loyalty cards, ready at the till.",
+  // Makes "Add to Home Screen" on iOS produce a standalone app with our name
+  // and icon (SPEC "Icon & PWA").
+  appleWebApp: { capable: true, title: "Cards", statusBarStyle: "default" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -36,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           {children}
           <Toaster />
+          <RegisterServiceWorker />
         </ThemeProvider>
       </body>
     </html>

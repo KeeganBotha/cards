@@ -10,19 +10,6 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -39,6 +26,20 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-warning: var(--warning);
+  --color-tile-red: var(--tile-red);
+  --color-tile-orange: var(--tile-orange);
+  --color-tile-yellow: var(--tile-yellow);
+  --color-tile-green: var(--tile-green);
+  --color-tile-teal: var(--tile-teal);
+  --color-tile-blue: var(--tile-blue);
+  --color-tile-indigo: var(--tile-indigo);
+  --color-tile-purple: var(--tile-purple);
+  --color-tile-pink: var(--tile-pink);
+  --color-tile-slate: var(--tile-slate);
+  --color-tile-foreground: var(--tile-foreground);
+  --color-barcode-ink: var(--barcode-ink);
+  --color-barcode-paper: var(--barcode-paper);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -48,73 +49,84 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* CardCrate palette carried over verbatim (SPEC "Design tokens") and mapped
+   onto shadcn's variable names. Light: the icon's cream; dark: warm near-black.
+   secondary/muted/accent surfaces have no mobile equivalent — they are the
+   background nudged one step toward the foreground. */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --background: #F8F3E5;
+  --foreground: #2B1E16;
+  --card: #FFFFFF;
+  --card-foreground: #2B1E16;
+  --popover: #FFFDF8;
+  --popover-foreground: #2B1E16;
+  --primary: #B04A2E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EFE8D8;
+  --secondary-foreground: #2B1E16;
+  --muted: #EFE8D8;
+  --muted-foreground: #6F6259;
+  --accent: #EFE8D8;
+  --accent-foreground: #2B1E16;
+  --destructive: #B3261E;
+  --warning: #8A5A00;
+  --border: #E7DFCF;
+  --input: #E7DFCF;
+  --ring: #B04A2E;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Card tiles: pastel cards from the crate; tile-foreground is the crate's
+     dark brown, AA-verified on every tile in both schemes. */
+  --tile-red: #F7A59A;
+  --tile-orange: #FFB38A;
+  --tile-yellow: #FEDD6D;
+  --tile-green: #BFE3B4;
+  --tile-teal: #B4E4DD;
+  --tile-blue: #AEDFF7;
+  --tile-indigo: #C3C8F5;
+  --tile-purple: #DCC4F2;
+  --tile-pink: #F7C9C0;
+  --tile-slate: #D9D4CB;
+  --tile-foreground: #3B2A1F;
+
+  /* Barcodes stay black-on-white in BOTH themes or scanners will not read
+     them (SPEC rule 2). Never overridden in .dark. */
+  --barcode-ink: #000000;
+  --barcode-paper: #FFFFFF;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #14110E;
+  --foreground: #F5EFE6;
+  --card: #1F1A16;
+  --card-foreground: #F5EFE6;
+  --popover: #2A231E;
+  --popover-foreground: #F5EFE6;
+  --primary: #FC9A72;
+  --primary-foreground: #14110E;
+  --secondary: #2A231E;
+  --secondary-foreground: #F5EFE6;
+  --muted: #2A231E;
+  --muted-foreground: #A89C90;
+  --accent: #2A231E;
+  --accent-foreground: #F5EFE6;
+  --destructive: #F28B82;
+  --warning: #F5C451;
+  --border: #3A302A;
+  --input: #3A302A;
+  --ring: #FC9A72;
+
+  --tile-red: #E08C80;
+  --tile-orange: #EE9B6E;
+  --tile-yellow: #E6C45A;
+  --tile-green: #A2CC96;
+  --tile-teal: #95CDC4;
+  --tile-blue: #92C7E4;
+  --tile-indigo: #A8ADE3;
+  --tile-purple: #C3A7E2;
+  --tile-pink: #E6ACA2;
+  --tile-slate: #B9B2A7;
+  --tile-foreground: #2B1E16;
 }
 
 @layer base {

@@ -16,7 +16,7 @@ type Props = {
 
 // Controller-bound colour swatches (UI.md §7): ten 44px buttons in a radio
 // group. Value is a CardColor or null; pressing the selected swatch clears it
-// back to null (the default slate tile).
+// back to null (the default slate tile). ring-[3px] matches shadcn's Button focus ring.
 export function RHFColorPicker({ name, label, containerClassName }: Props) {
   const labelId = useId();
   const { control } = useFormContext();

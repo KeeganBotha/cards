@@ -12,6 +12,7 @@ import { RHFInput } from "@/components/RHFInput";
 import { createCard, updateCard } from "../actions";
 import { AUTO, cardFormSchema, resolveFormat } from "../_data/cards.schemas";
 import type { CardDto } from "../_data/cards.provider";
+import { BarcodeScanner, type ScanHit } from "./BarcodeScanner";
 import { CodeHint } from "./CodeHint";
 import { RHFColorPicker } from "./RHFColorPicker";
 import { RHFFormatPicker } from "./RHFFormatPicker";
@@ -43,9 +44,17 @@ export function CardForm(props: Props) {
   const {
     handleSubmit,
     setError,
+    setValue,
     control,
     formState: { errors, isSubmitting },
   } = form;
+
+  // Scan pre-fills number + format on the first hit (SPEC /cards/new); the
+  // user can still change either before saving.
+  const onScan = ({ code, format }: ScanHit) => {
+    setValue("code", code, { shouldDirty: true, shouldValidate: true });
+    setValue("format", format, { shouldDirty: true });
+  };
 
   // Digits-only keyboard once the resolved format is a GS1 one (SPEC /cards/new).
   const code = useWatch({ control, name: "code" });
@@ -73,6 +82,7 @@ export function CardForm(props: Props) {
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} noValidate className="flex flex-col gap-6">
+        {!editing && <BarcodeScanner onHit={onScan} />}
         <RHFInput
           name="storeName"
           label="Store"
